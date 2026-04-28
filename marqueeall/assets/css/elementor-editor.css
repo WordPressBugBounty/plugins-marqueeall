@@ -1,0 +1,44 @@
+/* MarqueeAll Widget Badge in Elementor Panel */
+.elementor-element .icon i.marquee-all-widget-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.elementor-element .icon i.marquee-all-widget-icon::after {
+    content: "MA";
+    position: absolute;
+    top: -16px;
+    right: 55px;
+    background: #f2644d;
+    color: white;
+    font-size: 8px;
+    font-weight: 600;
+    padding: 2px 5px;
+    z-index: 0;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+/* Hover effect */
+.elementor-element .icon i.marquee-all-widget-icon:hover::after {
+    background: #3a7bc8;
+}
+
+/* For RTL support */
+.rtl .elementor-element .icon i.marquee-all-widget-icon::after {
+    right: auto;
+    left: -8px;
+}
+.masscie-scramble-container {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.masscie-scramble-before,
+.masscie-scramble-after {
+    display: inline-block;
+}

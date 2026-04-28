@@ -1,0 +1,192 @@
+.masscie-crypto-marquee {
+    overflow: hidden;
+    width: 100%;
+}
+
+.masscie-crypto-marquee.masscie-vertical {
+    height: 400px;
+}
+
+.masscie-crypto-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-right: 5px;
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
+}
+
+.masscie-crypto-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.masscie-crypto-name {
+    font-weight: 600;
+
+}
+
+.masscie-crypto-symbol {
+    color: #6c757d;
+    font-size: 0.85em;
+    text-transform: uppercase;
+}
+
+.masscie-crypto-price {
+    font-weight: 600;
+    color: #212529;
+    margin-left: auto;
+}
+
+.masscie-crypto-change {
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.masscie-crypto-change.positive {
+    color: #10b981;
+}
+
+.masscie-crypto-change.negative {
+    color: #ef4444;
+}
+
+/* API Key Validation Messages */
+.elementor-control .api-key-validation-message {
+    margin-top: 5px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.elementor-control .api-key-validation-message.elementor-control-field-description-success {
+    color: #10b981;
+    background-color: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid #10b981;
+}
+
+.elementor-control .api-key-validation-message.elementor-control-field-description-error {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+    border-left: 3px solid #ef4444;
+}
+
+/* Disabled state for crypto select */
+.elementor-control-crypto_ids select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Loading state for crypto select */
+.elementor-control-crypto_ids .loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Vertical layout */
+.masscie-vertical .masscie-track {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.masscie-vertical .masscie-crypto-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Loading state */
+.elementor-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.elementor-loading:after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: elementor-loading-spinner 0.8s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes elementor-loading-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Select2 overrides */
+.select2-container--default .select2-selection--multiple {
+    border-color: #d5dadf;
+    border-radius: 3px;
+    min-height: 40px;
+    padding: 3px;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-color: #5d9bfb;
+    box-shadow: 0 0 0 1px #5d9bfb;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #f0f5ff;
+    border: 1px solid #c2d8ff;
+    border-radius: 3px;
+    color: #1e40af;
+    padding: 2px 8px;
+    margin: 2px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #3b82f6;
+    margin-right: 5px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: #1e40af;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .masscie-crypto-item {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    .masscie-crypto-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .masscie-crypto-symbol {
+        display: none;
+    }
+}

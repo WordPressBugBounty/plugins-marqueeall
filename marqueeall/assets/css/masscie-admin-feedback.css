@@ -1,0 +1,45 @@
+#masscie-feedback-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+}
+
+.masscie-feedback-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.masscie-feedback-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 480px;
+    max-width: 95%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.masscie-feedback-dialog h2 {
+    margin-top: 0;
+}
+
+#masscie-feedback-form label {
+    display: block;
+    margin: 6px 0;
+}
+
+#masscie-feedback-form textarea {
+    width: 100%;
+    min-height: 80px;
+    margin-top: 8px;
+}
+
+.masscie-feedback-buttons {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}

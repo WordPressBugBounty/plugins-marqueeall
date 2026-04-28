@@ -1,0 +1,468 @@
+/* masscie-marquee CSS - Final Polished Version */
+
+/* Root vars */
+.masscie-marquee-wrap {
+  --masscie-gap: 24px;
+  --masscie-duration: 30s;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  display: block;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Track */
+.masscie-track {
+  display: flex;
+  gap: var(--masscie-gap, 24px);
+  flex-wrap: nowrap;
+  align-items: center;
+  transition: none !important;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Group = one set of items */
+.masscie-group {
+  display: flex;
+  gap: var(--masscie-gap, 24px);
+  flex-shrink: 0;
+  align-items: center;
+  animation: masscie-scroll-x linear infinite;
+  animation-duration: var(--masscie-duration, 30s);
+  animation-play-state: running;
+  backface-visibility: hidden;
+  transform: translate3d(0,0,0);
+  will-change: transform;
+}
+
+/* Vertical mode */
+.masscie-vertical .masscie-track {
+  flex-direction: column;
+}
+.masscie-vertical .masscie-group {
+  flex-direction: column;
+  animation-name: masscie-scroll-y !important;
+}
+
+/* Reverse direction */
+.masscie-reverse .masscie-group {
+  animation-direction: reverse;
+}
+
+.elementor-widget-masscie-testimonial-marquee .masscie-item img {
+  width: 250px;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.masscie-news-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #000;
+    padding: 10px 20px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.masscie-news-title svg, .masscie-separator svg {
+  width: 16px;  /* small icon */
+  height: 16px;
+  fill: #fff;   /* white icon */
+}
+
+/* Items */
+.masscie-marquee-wrap .masscie-track > * {
+  flex: 0 0 auto !important;
+  min-width: 0;
+}
+.masscie-item {
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.elementor-widget-masscie-testimonial-marquee .masscie-item img {
+    width: 50px;
+    height: 52px;
+    border-radius: 50%;
+}
+.elementor-widget-masscie-image-marquee img {
+    width: 250px;
+    height: 100%;
+}
+/* Keyframes — one full group width/height */
+@keyframes masscie-scroll-x {
+  0%   { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(calc(-1 * (100% + var(--masscie-gap, 24px))),0,0); }
+}
+
+@keyframes masscie-scroll-y {
+  0%   { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(0,calc(-1 * (100% + var(--masscie-gap, 24px))),0); }
+}
+
+/* Prevent blink at load by forcing groups offscreen immediately */
+.masscie-group {
+  animation-fill-mode: forwards;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .masscie-group { animation-play-state: paused !important; }
+}
+
+/* RTL safe */
+[dir="rtl"] .masscie-track { direction: rtl; }
+
+.masscie-mask-edges {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.masscie-vertical.masscie-mask-edges {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.masscie-icon {
+  display: flex;
+  align-items: center;
+}
+
+.masscie-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    margin-right: 10px;
+}
+
+.masscie-testimonial .masscie-content {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+
+.masscie-testimonial .masscie-author {
+  margin-top: auto;
+}
+
+.masscie-testimonial .masscie-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+
+.masscie-testimonial .masscie-role {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.masscie-testimonial .masscie-rating {
+  color: #f5a623; /* gold stars */
+  font-size: 14px;
+}
+
+.masscie-card {
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;          /* adapt to container width */
+    max-width: 350px;     /* optional: prevent too wide cards */
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    box-sizing: border-box; /* ensures padding doesn't break layout */
+}
+
+/* Marquee Track */
+.elementor-widget-post-grid-marquee .masscie-track {
+    display: flex;
+    gap: var(--masscie-gap);
+}
+
+/* Marquee wrapper */
+.elementor-widget-post-grid-marquee .masscie-marquee-wrap {
+    padding: 20px 0;
+}
+
+
+        .masscie-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .masscie-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .masscie-author {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .masscie-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .masscie-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .masscie-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.25rem;
+        }
+
+        .masscie-role {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .masscie-rating {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .masscie-star {
+            color: #fbbf24;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+
+            .masscie-card {
+                width: 300px;
+                padding: 1.5rem;
+            }
+
+            .masscie-content {
+                font-size: 1rem;
+            }
+
+            .masscie-avatar {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .masscie-track::before,
+            .masscie-track::after {
+                width: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .masscie-card {
+                width: 280px;
+                padding: 1.25rem;
+            }
+
+            .masscie-content {
+                font-size: 0.95rem;
+            }
+
+            .masscie-name {
+                font-size: 1rem;
+            }
+
+            .masscie-role {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .masscie-card {
+                background: rgba(45, 55, 72, 0.9);
+                color: #e2e8f0;
+            }
+
+            .masscie-content {
+                color: #e2e8f0;
+            }
+
+            .masscie-name {
+                color: #f7fafc;
+            }
+
+            .masscie-role {
+                color: #a0aec0;
+            }
+        }
+
+.pgm-post-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    overflow: hidden;
+    padding: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+	max-width: 380px;
+}
+.pgm-info {
+    padding: 15px;
+}
+
+.pgm-post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.pgm-thumb img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.pgm-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+	margin-bottom: 10px;
+}
+
+.pgm-title a {
+    text-decoration: none;
+    color: #222;
+}
+
+.pgm-meta {
+    margin-top: 2px;
+    font-size: 14px;
+    color: #777;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.pgm-meta i {
+    margin-right: 5px;
+    color: #888;
+}
+
+.pgm-excerpt {
+    margin-top: 10px;
+    color: #555;
+    font-size: 14px;
+}
+
+.pgm-readmore {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 18px;
+    background: #f13624;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+	font-size: 14px;
+}
+
+.pgm-readmore:hover {
+    background: #005bb5;
+}
+
+/* Team Member Image with Grayscale Effect */
+.masscie-team-member-image {
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    transition: all 0.5s ease;
+}
+
+/* Default state for images when grayscale is enabled */
+.masscie-grayscale .masscie-team-member-image img {
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+}
+
+/* Hover state - show color */
+.masscie-grayscale .masscie-team-member:hover .masscie-team-member-image img {
+    filter: grayscale(0%);
+}
+
+/* Base image styles */
+.masscie-team-member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+/* Text Scramble */
+.masscie-scramble-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    width: 100%;
+}
+
+.masscie-scramble-text {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 100;
+    font-size: 28px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.masscie-scramble-text .dud {
+    opacity: 0.6;
+}
+
+/* Text Scramble Widget Styles */
+.masscie-scramble-container {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    line-height: 1;
+}
+
+.masscie-scramble-before,
+.masscie-scramble-after,
+.masscie-scramble-text {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    line-height: inherit;
+}
+
+.masscie-scramble-text {
+    display: inline-flex;
+    align-items: center;
+}
