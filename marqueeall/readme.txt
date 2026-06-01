@@ -2,9 +2,9 @@
 Contributors: amandeepwebspero
 Tags: elementor, marquee, ticker, news ticker, image marquee
 Requires at least: 5.8
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,6 +153,11 @@ Absolutely! Each widget has a **pause-on-hover option** to allow users to read c
 
 == Upgrade Notice ==
 
+= 1.2.1 =
+* Enhanced: Compatibility with WordPress 7.0.
+* Enhanced: Compatibility with Elementor 4.1.1.
+* Optimized: Codebase improvements and minor performance enhancements.
+
 = 1.2.0 =
 * Fixed: issue with clickable image urls in the image marquee custom url.
 
@@ -166,6 +171,11 @@ Absolutely! Each widget has a **pause-on-hover option** to allow users to read c
 * Fixed: Fixed all issues reported by “Plugin Check” plugin.
 
 == Changelog ==
+
+= 1.2.1 =
+* Enhanced: Compatibility with WordPress 7.0.
+* Enhanced: Compatibility with Elementor 4.1.1.
+* Optimized: Codebase improvements and minor performance enhancements.
 
 = 1.2.0 =
 * Fixed: issue with clickable image urls in the image marquee custom url.
