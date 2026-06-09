@@ -294,37 +294,60 @@ class Image_Marquee extends Widget_Base {
              <?php echo $vh ? 'style="height:' . esc_attr( $vh ) . ';"' : ''; ?>>
             <div class="masscie-track">
                 <?php
-                if ( ! empty( $s['items'] ) ) {
-                    foreach ( $s['items'] as $item ) {
-                        $image_html = Group_Control_Image_Size::get_attachment_image_html( $item, 'thumbnail', 'image' );
+if ( ! empty( $s['items'] ) ) {
 
-                        if ( $lazy ) {
-                            $image_html = preg_replace( '/<img(\s+)/i', '<img loading="lazy" $1', $image_html );
-                        }
+	foreach ( $s['items'] as $index => $item ) {
 
-                        $content = '<div class="masscie-item">' . $image_html . '</div>';
+		$image_html = Group_Control_Image_Size::get_attachment_image_html(
+			$item,
+			'thumbnail',
+			'image'
+		);
 
-                        if ( 'file' === $link_to && ! empty( $item['image']['url'] ) ) {
-                            printf(
-                                '<a data-elementor-open-lightbox="%s" href="%s" class="masscie-link">%s</a>',
-                                esc_attr( $open_lightbox ? 'yes' : 'no' ),
-                                esc_url( $item['image']['url'] ),
-                                wp_kses_post( $content )
-                            );
-                        } elseif ( 'custom' === $link_to && ! empty( $item['link']['url'] ) ) {
-                            $attrs  = 'href="' . esc_url( $item['link']['url'] ) . '"';
-                            $attrs .= ! empty( $item['link']['is_external'] ) ? ' target="_blank"' : '';
-                            $attrs .= ! empty( $item['link']['nofollow'] ) ? ' rel="nofollow"' : '';
-                            printf(
-                                '<a %s class="masscie-link">%s</a>',
-                                $attrs,
-                                wp_kses_post( $content )
-                            );
-                        } else {
-                            echo wp_kses_post( $content );
-                        }
-                    }
-                }
+		if ( $lazy ) {
+			$image_html = preg_replace(
+				'/<img(\s+)/i',
+				'<img loading="lazy" $1',
+				$image_html
+			);
+		}
+
+		$content = '<div class="masscie-item">' . $image_html . '</div>';
+
+		if ( 'file' === $link_to && ! empty( $item['image']['url'] ) ) {
+
+			printf(
+				'<a data-elementor-open-lightbox="%1$s" href="%2$s" class="masscie-link">%3$s</a>',
+				esc_attr( $open_lightbox ? 'yes' : 'no' ),
+				esc_url( $item['image']['url'] ),
+				wp_kses_post( $content )
+			);
+
+		} elseif ( 'custom' === $link_to && ! empty( $item['link']['url'] ) ) {
+
+			$link_key = 'image_link_' . $index;
+
+			$this->add_link_attributes( $link_key, $item['link'] );
+
+			$this->add_render_attribute(
+				$link_key,
+				'class',
+				'masscie-link'
+			);
+
+			printf(
+				'<a %1$s>%2$s</a>',
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Elementor escaped render attributes.
+				$this->get_render_attribute_string( $link_key ),
+				wp_kses_post( $content )
+			);
+
+		} else {
+
+			echo wp_kses_post( $content );
+		}
+	}
+}
                 ?>
             </div>
         </div>

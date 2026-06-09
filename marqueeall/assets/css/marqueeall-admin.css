@@ -1,0 +1,562 @@
+/**
+ * MarqueeAll — Widget Manager Admin Styles
+ *
+ * Brand color: #f2684f
+ *
+ * @package MarqueeAll
+ * @since   1.3.0
+ */
+
+/* =========================================================
+   Reset / Base
+   ========================================================= */
+.marqueeall-wrap *,
+.marqueeall-wrap *::before,
+.marqueeall-wrap *::after {
+	box-sizing: border-box;
+}
+
+.marqueeall-wrap {
+	--ma-primary:       #f2684f;
+	--ma-primary-hover: #e05540;
+	--ma-primary-light: #fff3f1;
+	--ma-primary-ring:  rgba(242,104,79,.2);
+	--ma-danger:        #e53e3e;
+	--ma-danger-light:  #fff5f5;
+	--ma-success:       #38a169;
+	--ma-border:        #e2e8f0;
+	--ma-bg:            #f8f9fc;
+	--ma-card-bg:       #ffffff;
+	--ma-text:          #1a202c;
+	--ma-text-muted:    #718096;
+	--ma-radius:        10px;
+	--ma-shadow:        0 1px 3px rgba(0,0,0,.08);
+	--ma-shadow-hover:  0 4px 12px rgba(242,104,79,.18);
+
+	background: var(--ma-bg);
+	padding: 0;
+	margin: 0;
+	min-height: 100vh;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	color: var(--ma-text);
+}
+
+/* =========================================================
+   Header
+   ========================================================= */
+.marqueeall-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 24px;
+	background: #fff;
+	border-bottom: 1px solid var(--ma-border);
+	position: sticky;
+	top: 32px;
+	z-index: 100;
+}
+
+.marqueeall-header__brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.marqueeall-header__logo {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.marqueeall-header__logo img {
+	width: 36px;
+	height: 36px;
+	border-radius: 6px;
+	display: block;
+}
+
+.marqueeall-header__title {
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--ma-text);
+	border: none;
+}
+
+/* =========================================================
+   Tabs
+   ========================================================= */
+.marqueeall-tabs {
+	display: flex;
+	background: #fff;
+	border-bottom: 1px solid var(--ma-border);
+	padding: 0 24px;
+}
+
+.marqueeall-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 12px 16px;
+	background: none;
+	border: none;
+	border-bottom: 3px solid transparent;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--ma-text-muted);
+	cursor: pointer;
+	transition: color .15s, border-color .15s;
+	margin-bottom: -1px;
+}
+
+.marqueeall-tab:hover {
+	color: var(--ma-primary);
+}
+
+.marqueeall-tab--active {
+	color: var(--ma-primary);
+	border-bottom-color: var(--ma-primary);
+}
+
+/* =========================================================
+   Panel
+   ========================================================= */
+.marqueeall-panel {
+	padding: 24px;
+}
+
+/* =========================================================
+   Toolbar
+   ========================================================= */
+.marqueeall-toolbar {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+.marqueeall-toolbar__left { flex: 1 1 auto; }
+
+.marqueeall-toolbar__right {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.marqueeall-section-heading {
+	margin: 0 0 4px;
+	padding: 0;
+	font-size: 18px;
+	font-weight: 700;
+	color: var(--ma-text);
+	border: none;
+}
+
+.marqueeall-stats {
+	margin: 0;
+	font-size: 13px;
+	color: var(--ma-text-muted);
+}
+
+/* =========================================================
+   Search
+   ========================================================= */
+.marqueeall-search-wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.marqueeall-search-icon {
+	position: absolute;
+	left: 10px;
+	color: var(--ma-text-muted);
+	font-size: 16px;
+	pointer-events: none;
+	top: 11px;
+}
+
+input#marqueeall-search {
+    padding: 0px 30px;
+}
+
+.marqueeall-search {
+	padding: 6px 10px 6px 32px;
+	border: 1px solid var(--ma-border);
+	border-radius: 6px;
+	font-size: 13px;
+	width: 220px;
+	background: #fff;
+	color: var(--ma-text);
+	transition: border-color .15s, box-shadow .15s;
+}
+
+.marqueeall-search:focus {
+	outline: none;
+	border-color: var(--ma-primary);
+	box-shadow: 0 0 0 3px var(--ma-primary-ring);
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.marqueeall-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 7px 16px;
+	border-radius: 6px;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background .15s, color .15s, border-color .15s, box-shadow .15s;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+/* Primary — filled #f2684f */
+.marqueeall-btn--primary {
+	background: var(--ma-primary) !important;
+	color: #fff !important;
+	border: 1px solid var(--ma-primary) !important;
+	text-shadow: none;
+}
+
+.marqueeall-btn--primary:hover,
+.marqueeall-btn--primary:focus {
+	background: var(--ma-primary-hover) !important;
+	border-color: var(--ma-primary-hover) !important;
+	color: #fff !important;
+	box-shadow: 0 2px 8px var(--ma-primary-ring);
+}
+
+.marqueeall-btn--primary:disabled {
+	opacity: .65;
+	cursor: not-allowed;
+}
+
+/* Outline */
+.marqueeall-btn--outline {
+	background: #fff;
+	color: var(--ma-text);
+	border: 1px solid var(--ma-border);
+}
+
+.marqueeall-btn--outline:hover {
+	border-color: var(--ma-primary);
+	color: var(--ma-primary);
+}
+
+/* Danger outline */
+.marqueeall-btn--danger:hover {
+	border-color: var(--ma-danger);
+	color: var(--ma-danger);
+}
+
+/* =========================================================
+   Section
+   ========================================================= */
+.marqueeall-section { margin-bottom: 32px; }
+
+.marqueeall-section__title {
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	color: var(--ma-text-muted);
+	margin: 0 0 16px;
+	padding: 0;
+	border: none;
+}
+
+/* =========================================================
+   Widget Grid
+   ========================================================= */
+.marqueeall-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 14px;
+}
+
+/* =========================================================
+   Widget Card
+   ========================================================= */
+.marqueeall-card {
+	background: var(--ma-card-bg);
+	border: 1px solid var(--ma-border);
+	border-radius: var(--ma-radius);
+	padding: 14px 14px 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	position: relative;
+	cursor: pointer;
+	transition: box-shadow .2s, border-color .2s;
+}
+
+.marqueeall-card:hover {
+	box-shadow: var(--ma-shadow-hover);
+	border-color: rgba(242,104,79,.35);
+}
+
+/* Enabled / active state */
+.marqueeall-card--active {
+	border-color: var(--ma-primary);
+	background: var(--ma-primary-light);
+}
+
+/* Hidden by search */
+.marqueeall-card--hidden { display: none !important; }
+
+/* Pro badge */
+.marqueeall-card__badge {
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	background: var(--ma-primary);
+	color: #fff;
+	font-size: 9px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	padding: 2px 7px;
+	border-radius: var(--ma-radius) 0 var(--ma-radius) 0;
+}
+
+/* Card body — icon + name */
+.marqueeall-card__body {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding-top: 8px;
+	flex: 1;
+}
+
+.marqueeall-card__icon {
+	font-size: 28px !important;
+	color: var(--ma-text-muted);
+	line-height: 1;
+	transition: color .15s;
+	margin-bottom: 5px;
+}
+
+.marqueeall-card--active .marqueeall-card__icon {
+	color: var(--ma-primary);
+}
+
+.marqueeall-card__name {
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--ma-text);
+	line-height: 1.4;
+}
+
+/* Card footer — toggle + doc/demo links */
+.marqueeall-card__footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: auto;
+	gap: 8px;
+}
+
+.marqueeall-card__links {
+	display: flex;
+	gap: 8px;
+}
+
+.marqueeall-card__link {
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--ma-primary);
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+}
+
+.marqueeall-card__link:hover {
+	text-decoration: underline;
+	color: var(--ma-primary-hover);
+}
+
+/* =========================================================
+   Toggle Switch
+   ========================================================= */
+.marqueeall-toggle {
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.marqueeall-toggle__input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	position: absolute;
+}
+
+.marqueeall-toggle__slider {
+	position: relative;
+	display: inline-block;
+	width: 38px;
+	height: 22px;
+	background: #cbd5e0;
+	border-radius: 999px;
+	transition: background .2s;
+	flex-shrink: 0;
+}
+
+.marqueeall-toggle__slider::before {
+	content: '';
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 16px;
+	height: 16px;
+	background: #fff;
+	border-radius: 50%;
+	transition: transform .2s;
+	box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+
+.marqueeall-toggle__input:checked + .marqueeall-toggle__slider {
+	background: var(--ma-primary);
+}
+
+.marqueeall-toggle__input:checked + .marqueeall-toggle__slider::before {
+	transform: translateX(16px);
+}
+
+.marqueeall-toggle__input:disabled + .marqueeall-toggle__slider {
+	opacity: .45;
+	cursor: not-allowed;
+}
+
+.marqueeall-toggle__input:focus-visible + .marqueeall-toggle__slider {
+	box-shadow: 0 0 0 3px var(--ma-primary-ring);
+}
+
+/* =========================================================
+   No Results
+   ========================================================= */
+.marqueeall-no-results {
+	text-align: center;
+	color: var(--ma-text-muted);
+	padding: 32px 16px;
+	font-size: 14px;
+}
+
+/* =========================================================
+   Review Box
+   ========================================================= */
+.marqueeall-review-box {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	background: #fff;
+	border: 1px solid var(--ma-border);
+	border-left: 4px solid var(--ma-primary);
+	border-radius: var(--ma-radius);
+	padding: 16px 20px;
+	margin-top: 8px;
+}
+
+.marqueeall-review-box__icon {
+	font-size: 26px;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.marqueeall-review-box__content strong {
+	display: block;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--ma-text);
+	margin-bottom: 3px;
+}
+
+.marqueeall-review-box__content p {
+	margin: 0;
+	font-size: 13px;
+	color: var(--ma-text-muted);
+}
+
+.marqueeall-review-box__content a {
+	color: var(--ma-primary);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.marqueeall-review-box__content a:hover {
+	text-decoration: underline;
+	color: var(--ma-primary-hover);
+}
+
+/* =========================================================
+   Toast Notification
+   ========================================================= */
+.marqueeall-toast {
+	position: fixed;
+	bottom: 24px;
+	right: 24px;
+	background: var(--ma-text);
+	color: #fff;
+	padding: 12px 20px;
+	border-radius: 8px;
+	font-size: 13px;
+	font-weight: 600;
+	box-shadow: 0 4px 16px rgba(0,0,0,.2);
+	opacity: 0;
+	transform: translateY(8px);
+	transition: opacity .25s, transform .25s;
+	pointer-events: none;
+	z-index: 9999;
+	max-width: 320px;
+}
+
+.marqueeall-toast--visible {
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: auto;
+}
+
+.marqueeall-toast--success { background: var(--ma-success); }
+.marqueeall-toast--error   { background: var(--ma-danger); }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 960px) {
+	.marqueeall-grid {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	}
+}
+
+@media (max-width: 600px) {
+	.marqueeall-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+
+	.marqueeall-toolbar {
+		flex-direction: column;
+	}
+
+	.marqueeall-toolbar__right {
+		width: 100%;
+	}
+
+	.marqueeall-search,
+	.marqueeall-search-wrap {
+		width: 100%;
+	}
+
+	.marqueeall-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

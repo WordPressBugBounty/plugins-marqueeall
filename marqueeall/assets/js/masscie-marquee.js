@@ -1,165 +1,367 @@
 (function ($) {
-  'use strict';
+	'use strict';
 
-  function initMarquee($wrap) {
-    var prevState = $wrap.data('masscie-state');
-    if (prevState) {
-      try { if (prevState.ro) prevState.ro.disconnect(); } catch (e) {}
-      $wrap.off('.massciePause masscieResize masscieImg');
-      $wrap.removeData('masscie-state');
-    }
+	/**
+	 * Text Scramble
+	 */
+	function initTextScramble($scope = null) {
 
-    var speed = parseFloat($wrap.data('speed') || $wrap.data('animation-speed') || 60);
-    if (!isFinite(speed) || speed <= 0) speed = 60;
-    var reverse = $wrap.data('reverse') === true || $wrap.data('reverse') === 'yes' || $wrap.hasClass('masscie-reverse');
-    var pause = $wrap.data('pause') !== 'no' && $wrap.data('pause-on-hover') !== 'no';
-    var gap = parseInt($wrap.data('gap') || 24, 10);
-    var isVertical = $wrap.hasClass('masscie-vertical') || $wrap.data('vertical') === 'yes';
-    var $track = $wrap.find('.masscie-track');
+		const elements = $scope
+			? $scope[0].querySelectorAll('.masscie-scramble-text:not([data-scramble-initialized])')
+			: document.querySelectorAll('.masscie-scramble-text:not([data-scramble-initialized])');
 
-    $wrap.css('--masscie-gap', gap + 'px');
-    var $originalItems = $track.children().clone(true, true);
+		elements.forEach(function (el) {
 
-    function measureGroupPx($group) {
-      var rect = $group[0].getBoundingClientRect();
-      return Math.max(0, Math.round(isVertical ? rect.height : rect.width));
-    }
+			el.setAttribute('data-scramble-initialized', 'true');
 
-    function build() {
-      $track.empty();
-      var $g1 = $('<div class="masscie-group"></div>');
-      var $g2 = $('<div class="masscie-group"></div>');
+			if (typeof TextScramble !== 'undefined') {
+				new TextScramble(el);
+			}
+		});
+	}
 
-      $g1.append($originalItems.clone(true, true));
-      $g2.append($originalItems.clone(true, true));
-      $track.append($g1).append($g2);
+	/**
+	 * Marquee
+	 */
+	function initMarquee($wrap) {
 
-      if (isVertical) $track.addClass('masscie-group-vertical'); else $track.removeClass('masscie-group-vertical');
+		var prevState = $wrap.data('masscie-state');
 
-      var wrapSize = isVertical ? Math.round($wrap.innerHeight()) : Math.round($wrap.innerWidth());
-      var groupPx = measureGroupPx($g1);
+		if (prevState) {
+			try {
+				if (prevState.ro) {
+					prevState.ro.disconnect();
+				}
+			} catch (e) {}
 
-      if (!groupPx) {
-        $g1.children().each(function () {
-          var $el = $(this);
-          if ($el.css('display') === 'none') $el.css({ display: isVertical ? 'block' : 'inline-block', visibility: 'hidden' });
-        });
-        groupPx = measureGroupPx($g1);
-      }
+			$wrap.off('.massciePause masscieResize masscieImg');
+			$wrap.removeData('masscie-state');
+		}
 
-      if (!groupPx || groupPx <= 0) { setTimeout(build, 80); return; }
+		var speed = parseFloat(
+			$wrap.data('speed') ||
+			$wrap.data('animation-speed') ||
+			60
+		);
 
-      while (groupPx < wrapSize) {
-        $g1.append($originalItems.clone(true, true));
-        $g2.append($originalItems.clone(true, true));
-        groupPx = measureGroupPx($g1);
-        if (groupPx > 50000) break;
-      }
+		if (!isFinite(speed) || speed <= 0) {
+			speed = 60;
+		}
 
-      var duration = groupPx / Math.max(1, speed);
-      if (Math.abs(duration - 3) < 0.01) duration += 0.01;
+		var reverse =
+			$wrap.data('reverse') === true ||
+			$wrap.data('reverse') === 'yes' ||
+			$wrap.hasClass('masscie-reverse');
 
-      $wrap.css('--masscie-duration', duration + 's');
-      $track.find('.masscie-group').css({
-        'animation-duration': duration + 's',
-        'animation-play-state': 'paused' // pause initially for smooth start
-      });
+		var pause =
+			$wrap.data('pause') !== 'no' &&
+			$wrap.data('pause-on-hover') !== 'no';
 
-      if (reverse) $track.find('.masscie-group').css('animation-direction', 'reverse'); 
-      else $track.find('.masscie-group').css('animation-direction', '');
+		var gap = parseInt($wrap.data('gap') || 24, 10);
 
-      $wrap.off('.massciePause');
-      if (pause) {
-        $wrap.on('mouseenter.massciePause', function () { $track.find('.masscie-group').css('animation-play-state', 'paused'); });
-        $wrap.on('mouseleave.massciePause', function () { $track.find('.masscie-group').css('animation-play-state', 'running'); });
-      }
+		var isVertical =
+			$wrap.hasClass('masscie-vertical') ||
+			$wrap.data('vertical') === 'yes';
 
-      // Smooth start after images or videos load
-      var $media = $track.find('img');
-      var loadedCount = 0;
-      function tryStart() {
-        loadedCount++;
-        if (loadedCount >= $media.length) {
-          requestAnimationFrame(function () {
-            $track.find('.masscie-group').css('animation-play-state', 'running');
-          });
-        }
-      }
+		var $track = $wrap.find('.masscie-track');
 
-      if ($media.length === 0) $track.find('.masscie-group').css('animation-play-state', 'running');
-      else {
-        $media.each(function () {
-          if (this.tagName.toLowerCase() === 'img') {
-            if (this.complete) tryStart();
-            else $(this).on('load', tryStart);
-          } else if (this.tagName.toLowerCase() === 'video') {
-            if (this.readyState >= 2) tryStart();
-            else $(this).on('loadeddata', tryStart);
-          }
-        });
-      }
+		$wrap.css('--masscie-gap', gap + 'px');
 
-      var state = $wrap.data('masscie-state') || {};
-      state.groupPx = groupPx;
-      state.duration = duration;
-      $wrap.data('masscie-state', state);
+		var $originalItems = $track.children().clone(true, true);
 
-      if (window.__masscie_debug) console.debug('masscie build:', { wrapSize: wrapSize, groupPx: groupPx, duration: duration, reverse: reverse, pause: pause });
-    }
+		function measureGroupPx($group) {
+			var rect = $group[0].getBoundingClientRect();
+			return Math.max(
+				0,
+				Math.round(isVertical ? rect.height : rect.width)
+			);
+		}
 
-    build();
+		function build() {
 
-    if ('ResizeObserver' in window) {
-      var ro = new ResizeObserver(function () {
-        clearTimeout($wrap.data('masscie-ro-t'));
-        build();
-      });
-      ro.observe($wrap[0]);
-      $track.find('img').each(function () { try { ro.observe(this); } catch (e) {} });
-      var state = $wrap.data('masscie-state') || {};
-      state.ro = ro;
-      $wrap.data('masscie-state', state);
-    } else {
-      $(window).on('resize.masscie', function () { clearTimeout($wrap.data('masscie-resize-t')); build(); });
-      $track.find('img').on('load.masscie loadeddata.masscie', build);
-      var state2 = $wrap.data('masscie-state') || {};
-      state2.ro = null;
-      $wrap.data('masscie-state', state2);
-    }
-  }
+			$track.empty();
 
-  $(window).on('elementor/frontend/init', function () {
-    var handler = function ($scope) { 
-      // Handle standard marquee wraps
-      $scope.find('.masscie-marquee-wrap, .masscie-crypto-marquee').each(function () { 
-        initMarquee($(this)); 
-      }); 
-    };
+			var $g1 = $('<div class="masscie-group"></div>');
+			var $g2 = $('<div class="masscie-group"></div>');
 
-    // Existing widgets
-    elementorFrontend.hooks.addAction('frontend/element_ready/masscie-text-marquee.default', handler);
-    elementorFrontend.hooks.addAction('frontend/element_ready/masscie-image-marquee.default', handler);
-    elementorFrontend.hooks.addAction('frontend/element_ready/masscie-testimonial-marquee.default', handler);
-    elementorFrontend.hooks.addAction('frontend/element_ready/masscie-marquee.default', handler);
+			$g1.append($originalItems.clone(true, true));
+			$g2.append($originalItems.clone(true, true));
 
-    // ✅ Crypto Marquee widget
-    elementorFrontend.hooks.addAction('frontend/element_ready/masscie-crypto-marquee.default', handler);
-    
-    // ✅ News Ticker widget
-    elementorFrontend.hooks.addAction('frontend/element_ready/masscie-news-ticker.default', handler);
-    elementorFrontend.hooks.addAction('frontend/element_ready/post-grid-marquee.default', handler);
-    elementorFrontend.hooks.addAction('frontend/element_ready/masscie-team-members-marquee.default', handler);
-  });
+			$track.append($g1).append($g2);
 
-  // Initialize on document ready for both standard and crypto marquees
-  $(function () { 
-    $('.masscie-marquee-wrap, .masscie-crypto-marquee').each(function () { 
-      initMarquee($(this)); 
-    }); 
-  });
+			if (isVertical) {
+				$track.addClass('masscie-group-vertical');
+			} else {
+				$track.removeClass('masscie-group-vertical');
+			}
+
+			var wrapSize = isVertical
+				? Math.round($wrap.innerHeight())
+				: Math.round($wrap.innerWidth());
+
+			var groupPx = measureGroupPx($g1);
+
+			if (!groupPx) {
+
+				$g1.children().each(function () {
+
+					var $el = $(this);
+
+					if ($el.css('display') === 'none') {
+						$el.css({
+							display: isVertical ? 'block' : 'inline-block',
+							visibility: 'hidden'
+						});
+					}
+				});
+
+				groupPx = measureGroupPx($g1);
+			}
+
+			if (!groupPx || groupPx <= 0) {
+				//setTimeout(build, 80);
+				return;
+			}
+
+			while (groupPx < wrapSize) {
+
+				$g1.append($originalItems.clone(true, true));
+				$g2.append($originalItems.clone(true, true));
+
+				groupPx = measureGroupPx($g1);
+
+				if (groupPx > 50000) {
+					break;
+				}
+			}
+
+			var duration = groupPx / Math.max(1, speed);
+
+			if (Math.abs(duration - 3) < 0.01) {
+				duration += 0.01;
+			}
+
+			$wrap.css('--masscie-duration', duration + 's');
+
+			$track.find('.masscie-group').css({
+				'animation-duration': duration + 's',
+				'animation-play-state': 'paused'
+			});
+
+			if (reverse) {
+				$track.find('.masscie-group').css(
+					'animation-direction',
+					'reverse'
+				);
+			} else {
+				$track.find('.masscie-group').css(
+					'animation-direction',
+					''
+				);
+			}
+
+			$wrap.off('.massciePause');
+
+			if (pause) {
+
+				$wrap.on('mouseenter.massciePause', function () {
+					$track.find('.masscie-group').css(
+						'animation-play-state',
+						'paused'
+					);
+				});
+
+				$wrap.on('mouseleave.massciePause', function () {
+					$track.find('.masscie-group').css(
+						'animation-play-state',
+						'running'
+					);
+				});
+			}
+
+			var $media = $track.find('img, video');
+			var loadedCount = 0;
+
+			function tryStart() {
+
+				loadedCount++;
+
+				if (loadedCount >= $media.length) {
+
+					requestAnimationFrame(function () {
+						$track.find('.masscie-group').css(
+							'animation-play-state',
+							'running'
+						);
+					});
+				}
+			}
+
+			if ($media.length === 0) {
+
+				$track.find('.masscie-group').css(
+					'animation-play-state',
+					'running'
+				);
+
+			} else {
+
+				$media.each(function () {
+
+					var tag = this.tagName.toLowerCase();
+
+					if (tag === 'img') {
+
+						if (this.complete) {
+							tryStart();
+						} else {
+							$(this).one('load', tryStart);
+						}
+
+					} else if (tag === 'video') {
+
+						if (this.readyState >= 2) {
+							tryStart();
+						} else {
+							$(this).one('loadeddata', tryStart);
+						}
+					}
+				});
+			}
+
+			var state = $wrap.data('masscie-state') || {};
+			state.groupPx = groupPx;
+			state.duration = duration;
+
+			$wrap.data('masscie-state', state);
+		}
+
+		build();
+
+		if ('ResizeObserver' in window) {
+
+			var ro = new ResizeObserver(function () {
+				build();
+			});
+
+			ro.observe($wrap[0]);
+
+			$track.find('img').each(function () {
+				try {
+					ro.observe(this);
+				} catch (e) {}
+			});
+
+			var state = $wrap.data('masscie-state') || {};
+			state.ro = ro;
+
+			$wrap.data('masscie-state', state);
+
+		} else {
+
+			$(window).on('resize.masscie', build);
+
+			var state2 = $wrap.data('masscie-state') || {};
+			state2.ro = null;
+
+			$wrap.data('masscie-state', state2);
+		}
+	}
+
+	/**
+	 * Global Initializer
+	 */
+	function initMasscieWidgets($scope = null) {
+
+		initTextScramble($scope);
+
+		var $context = $scope || $(document);
+
+		$context
+			.find('.masscie-marquee-wrap, .masscie-crypto-marquee')
+			.each(function () {
+				initMarquee($(this));
+			});
+	}
+
+	/**
+	 * Frontend Init
+	 */
+	$(document).ready(function () {
+		initMasscieWidgets();
+	});
+
+	/**
+	 * Elementor Init
+	 */
+	$(window).on('elementor/frontend/init', function () {
+
+		var handler = function ($scope) {
+			initMasscieWidgets($scope);
+		};
+
+		// Scramble widget
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/masscie_text_scramble.default',
+			handler
+		);
+
+		// Marquee widgets
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/masscie-text-marquee.default',
+			handler
+		);
+
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/masscie-image-marquee.default',
+			handler
+		);
+
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/masscie-testimonial-marquee.default',
+			handler
+		);
+
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/masscie-marquee.default',
+			handler
+		);
+
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/masscie-crypto-marquee.default',
+			handler
+		);
+
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/masscie-news-ticker.default',
+			handler
+		);
+
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/post-grid-marquee.default',
+			handler
+		);
+
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/masscie-team-members-marquee.default',
+			handler
+		);
+	});
+
+	/**
+	 * Elementor Editor Refresh
+	 */
+	if (window.elementor) {
+
+		$(document).on(
+			'elementor/nested-elements/after-rebuild',
+			function () {
+				initMasscieWidgets();
+			}
+		);
+	}
 
 })(jQuery);
-
 
 // Text Scramble Effect
 class TextScramble {
@@ -248,35 +450,3 @@ class TextScramble {
         clearTimeout(this.timeout);
     }
 }
-
-// Initialize Text Scramble for both frontend and Elementor editor
-function initTextScramble($scope = null) {
-    const elements = $scope 
-        ? $scope[0].querySelectorAll('.masscie-scramble-text:not([data-scramble-initialized])')
-        : document.querySelectorAll('.masscie-scramble-text:not([data-scramble-initialized])');
-    
-    elements.forEach(el => {
-        el.setAttribute('data-scramble-initialized', 'true');
-        new TextScramble(el);
-    });
-}
-
-// Initialize on DOM ready
-jQuery(function($) {
-    // Initialize any existing elements
-    initTextScramble();
-    
-    // Initialize for Elementor editor
-    if (typeof elementorFrontend !== 'undefined') {
-        elementorFrontend.hooks.addAction('frontend/element_ready/masscie_text_scramble.default', function($scope) {
-            initTextScramble($scope);
-        });
-    }
-    
-    // Handle Elementor preview refresh
-    if (window.elementor) {
-        $(document).on('elementor/nested-elements/after-rebuild', function() {
-            initTextScramble();
-        });
-    }
-});

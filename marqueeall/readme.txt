@@ -1,10 +1,10 @@
-=== MarqueeAll – Elementor Marquee for Image, Text, Post Grid, Testimonial,  Cryptocurrency & News Ticker 🌀  ===
+=== MarqueeAll – Elementor Marquee for Image, Text, Post Grid, Testimonial, Cryptocurrency & News Ticker 🌀  ===
 Contributors: amandeepwebspero
 Tags: elementor, marquee, ticker, news ticker, image marquee
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,12 +15,6 @@ All-in-one Elementor marquee addon for scrolling text, images, posts, testimonia
 MarqueeAll – Elementor Marquee Addon, A **powerful** and **lightweight** plugin that packs **8 essential marquee and ticker widgets into one plugin**, built specifically for Elementor. It lets you create smooth, continuous, auto-scrolling marquees and carousels with **minimal JavaScript**, ensuring zero performance impact on your website.
 
 With MarqueeAll, you can easily build **engaging marquee running text, image marquee, testimonial carousels, blog post marquee, news tickers, team member marquee, crypto price tickers, and custom scrolling content** using simple drag-and-drop Elementor widgets—no coding required.
-
-The plugin is carefully optimized to load only what is needed, making it ideal for **fast, SEO-friendly WordPress websites, Core Web Vitals optimization, and modern UI design**.
-
-Whether you’re a web designer, blogger, digital agency, business owner, or eCommerce site owner, MarqueeAll helps you showcase dynamic content, announcements, and real-time information that keeps visitors engaged and scrolling.
-
-🔥 **Trusted by designers and developers** to build high-performance Elementor websites with smooth scrolling animations, clean UI, and reliable performance.
 
 ---
 
@@ -99,6 +93,18 @@ It’s not just a slider — it’s a **motion-based content display system** th
 
 ---
 
+### 🎛️ **Widget Manager**
+
+MarqueeAll includes a powerful Widget Manager that allows you to enable or disable individual widgets directly from the WordPress dashboard.
+
+Benefits:
+
+✅ Disable unused widgets to keep Elementor organized  
+✅ Reduce unnecessary widget loading  
+✅ Quickly enable or disable widgets with one click  
+
+Perfect for agencies and developers who only want to use specific marquee widgets on a project.
+
 ### 🧩 **Pro Version (Coming Soon)**
 
 Shhh 🤫... something Pro is coming!  
@@ -111,6 +117,9 @@ Join thousands of Elementor users creating more interactive and engaging website
 Bring your content to life with **motion, flow, and style** — all inside Elementor.
 
 👉 [Install MarqueeAll today and make your content move beautifully!](https://wordpress.org/plugins/marqueeall/)
+
+🔥 **Trusted by designers and developers** to build high-performance Elementor websites with smooth scrolling animations, clean UI, and reliable performance.
+
 
 == Installation ==
 
@@ -139,6 +148,9 @@ Yes, you can enable lazy loading to improve page speed and performance.
 = Can I pause the marquee on hover? =  
 Absolutely! Each widget has a **pause-on-hover option** to allow users to read content easily.
 
+= Can I disable widgets I don't use? =
+Yes. MarqueeAll includes a built-in Widget Manager that allows you to enable or disable individual widgets directly from the WordPress dashboard. This helps keep Elementor organized and ensures only the widgets you need are available.
+
 == Screenshots ==
 
 1. MarqueeAll widgets – Example of Text, Image, Testimonials, News Ticker, Post Grid, and Custom Text marquees in action inside Elementor page builder.  
@@ -150,8 +162,13 @@ Absolutely! Each widget has a **pause-on-hover option** to allow users to read c
 7. Team Member Marquee – Display your team in a smooth-scrolling layout with hover effects, grayscale images.  
 8. Text Scramble widget – Add eye-catching text animations with before/after text support and full typography controls.  
 9. Crypto Price Ticker widget – Display real-time cryptocurrency prices in a smooth scrolling ticker using the CoinGecko Free API.
+10. Widget Manager – Enable or disable individual MarqueeAll widgets from a centralized dashboard interface.
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+* New: Added Widget Manager to enable or disable individual MarqueeAll widgets from the dashboard.
+* Fixed: Fixed all issues reported by “Plugin Check” plugin.
 
 = 1.2.1 =
 * Enhanced: Compatibility with WordPress 7.0.
@@ -171,6 +188,10 @@ Absolutely! Each widget has a **pause-on-hover option** to allow users to read c
 * Fixed: Fixed all issues reported by “Plugin Check” plugin.
 
 == Changelog ==
+
+= 1.2.2 =
+* New: Added Widget Manager to enable or disable individual MarqueeAll widgets from the dashboard.
+* Fixed: Fixed all issues reported by “Plugin Check” plugin.
 
 = 1.2.1 =
 * Enhanced: Compatibility with WordPress 7.0.
