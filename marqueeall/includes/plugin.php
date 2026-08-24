@@ -150,6 +150,10 @@ final class Plugin {
 				'file'  => 'includes/widgets/class-crypto-marquee.php',
 				'class' => 'MASSCIE\Widgets\Crypto_Marquee',
 			),
+			'faq-marquee'          => array(
+				'file'  => 'includes/widgets/class-faq-marquee.php',
+				'class' => 'MASSCIE\Widgets\Faq_Marquee',
+			),
 		);
 	}
 

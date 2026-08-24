@@ -1,10 +1,10 @@
-=== MarqueeAll – Elementor Marquee for Image, Text, Post Grid, Testimonial, Cryptocurrency & News Ticker 🌀  ===
+=== MarqueeAll – Elementor Marquee for Image, Text, Post Grid, Testimonial, Cryptocurrency, Faqs & News Ticker 🌀  ===
 Contributors: amandeepwebspero
 Tags: elementor, marquee, ticker, news ticker, image marquee
 Requires at least: 5.8
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ All-in-one Elementor marquee addon for scrolling text, images, posts, testimonia
 
 == Description ==
 
-MarqueeAll – Elementor Marquee Addon, A **powerful** and **lightweight** plugin that packs **8 essential marquee and ticker widgets into one plugin**, built specifically for Elementor. It lets you create smooth, continuous, auto-scrolling marquees and carousels with **minimal JavaScript**, ensuring zero performance impact on your website.
+MarqueeAll – Elementor Marquee Addon, A **powerful** and **lightweight** plugin that packs **9 essential marquee and ticker widgets into one plugin**, built specifically for Elementor. It lets you create smooth, continuous, auto-scrolling marquees and carousels with **minimal JavaScript**, ensuring zero performance impact on your website.
 
 With MarqueeAll, you can easily build **engaging marquee running text, image marquee, testimonial carousels, blog post marquee, news tickers, team member marquee, crypto price tickers, and custom scrolling content** using simple drag-and-drop Elementor widgets—no coding required.
 
@@ -45,6 +45,9 @@ Highlight customer feedback and ratings in a **continuous scrolling testimonial 
 
 📰 **News Ticker**
 Display **breaking news, offers, blog headlines, or custom text items** in a smooth scrolling ticker. Add custom icons, separators, label text, and links for each item with full Elementor control.
+
+❓ **FAQ Marquee** (New)
+Turn your FAQs into a scrolling row of question chips that pause and expand into the answer right in place when clicked. Supports horizontal or vertical orientation, single-open or multi-open behavior, and optional FAQPage schema markup for SEO-friendly rich results.
 
 ---
 
@@ -163,8 +166,13 @@ Yes. MarqueeAll includes a built-in Widget Manager that allows you to enable or 
 8. Text Scramble widget – Add eye-catching text animations with before/after text support and full typography controls.  
 9. Crypto Price Ticker widget – Display real-time cryptocurrency prices in a smooth scrolling ticker using the CoinGecko Free API.
 10. Widget Manager – Enable or disable individual MarqueeAll widgets from a centralized dashboard interface.
+11. FAQ Marquee widget – Scrolling row of FAQ questions that pause and expand into the answer on click, with horizontal/vertical orientation and optional FAQ schema markup.
 
 == Upgrade Notice ==
+
+= 1.2.3 =
+* New: Added FAQ Marquee widget - auto-scrolling FAQ chips that pause and expand in place, with optional FAQ schema markup.
+* Enhanced: Compatibility with WordPress 7.1.
 
 = 1.2.2 =
 * New: Added Widget Manager to enable or disable individual MarqueeAll widgets from the dashboard.
@@ -188,6 +196,9 @@ Yes. MarqueeAll includes a built-in Widget Manager that allows you to enable or 
 * Fixed: Fixed all issues reported by “Plugin Check” plugin.
 
 == Changelog ==
+
+= 1.2.3 =
+* New: Added FAQ Marquee widget - a scrolling row of FAQ questions that pauses and expands the clicked question in place, with optional FAQ schema (FAQPage) markup for SEO.
 
 = 1.2.2 =
 * New: Added Widget Manager to enable or disable individual MarqueeAll widgets from the dashboard.

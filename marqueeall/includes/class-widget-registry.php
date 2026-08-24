@@ -154,6 +154,16 @@ final class Widget_Registry {
 				'demo'  => $demo . 'crypto-marquee/',
 				'pro'   => false,
 			],
+			[
+				'slug'  => 'faq-marquee',
+				'title' => __( 'FAQ Marquee', 'marqueeall' ),
+				'class' => 'MASSCIE\Widgets\Faq_Marquee',
+				'file'  => 'includes/widgets/class-faq-marquee.php',
+				'icon'  => 'eicon-accordion',
+				'docs'  => $docs . 'faq-marquee/',
+				'demo'  => $demo . 'faq-marquee/',
+				'pro'   => false,
+			],
 		];
 
 		/**

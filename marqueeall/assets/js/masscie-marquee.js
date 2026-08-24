@@ -269,11 +269,108 @@
 	}
 
 	/**
+	 * FAQ Marquee
+	 *
+	 * The marquee track duplicates every chip into two scrolling groups,
+	 * so a click handler is delegated off the outer wrapper (rather than
+	 * bound per-chip) and every clone sharing the same question is kept
+	 * in sync when one of them is opened, closed, or replaced.
+	 */
+	function initFaqMarquee($scope = null) {
+
+		var $context = $scope || $(document);
+
+		$context.find('.masscie-faq-marquee:not([data-faq-initialized])').each(function () {
+
+			var $widget = $(this);
+
+			$widget.attr('data-faq-initialized', 'true');
+
+			var $wrap = $widget.find('.masscie-faq-track-wrap');
+			var $panel = $widget.find('.masscie-faq-panel');
+			var $panelQuestion = $panel.find('.masscie-faq-panel-question');
+			var $panelAnswer = $panel.find('.masscie-faq-panel-answer');
+			var singleOpen = $widget.data('single-open') !== 'no';
+			var openQuestion = null;
+
+			function pauseTrack() {
+				$wrap.find('.masscie-group').css('animation-play-state', 'paused');
+			}
+
+			function resumeTrack() {
+				if (!openQuestion) {
+					$wrap.find('.masscie-group').css('animation-play-state', 'running');
+				}
+			}
+
+			function syncActiveState() {
+				$widget.find('.masscie-faq-chip').each(function () {
+					var $chip = $(this);
+					var isActive = openQuestion !== null &&
+						$chip.data('faq-question') === openQuestion;
+
+					$chip.toggleClass('masscie-faq-active', isActive);
+					$chip.attr('aria-expanded', isActive ? 'true' : 'false');
+				});
+			}
+
+			function openChip($chip) {
+				openQuestion = $chip.data('faq-question');
+
+				$panelQuestion.text($chip.data('faq-question'));
+				$panelAnswer.text($chip.data('faq-answer'));
+				$panel.stop(true, true).slideDown(180);
+
+				pauseTrack();
+				syncActiveState();
+			}
+
+			function closeChip() {
+				openQuestion = null;
+
+				$panel.stop(true, true).slideUp(180);
+
+				syncActiveState();
+				resumeTrack();
+			}
+
+			$widget.on('click', '.masscie-faq-chip', function () {
+				var $chip = $(this);
+				var question = $chip.data('faq-question');
+
+				if (!singleOpen) {
+					// Multi-open mode: toggle this chip's own panel state only.
+					if (openQuestion === question) {
+						closeChip();
+					} else {
+						openChip($chip);
+					}
+					return;
+				}
+
+				if (openQuestion === question) {
+					closeChip();
+				} else {
+					openChip($chip);
+				}
+			});
+
+			$widget.on('keydown', '.masscie-faq-chip', function (e) {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					$(this).trigger('click');
+				}
+			});
+		});
+	}
+
+	/**
 	 * Global Initializer
 	 */
 	function initMasscieWidgets($scope = null) {
 
 		initTextScramble($scope);
+		initFaqMarquee($scope);
 
 		var $context = $scope || $(document);
 
@@ -344,6 +441,11 @@
 
 		elementorFrontend.hooks.addAction(
 			'frontend/element_ready/masscie-team-members-marquee.default',
+			handler
+		);
+
+		elementorFrontend.hooks.addAction(
+			'frontend/element_ready/masscie-faq-marquee.default',
 			handler
 		);
 	});
